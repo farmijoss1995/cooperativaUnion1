@@ -12,7 +12,7 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.*;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,7 +27,8 @@ import ec.ups.edu.app.g2.cooperativaUnion.modelo.EmpleadoON;
 import ec.ups.edu.app.g2.cooperativaUnion.utils.Mail;
 
 @Named
-@ConversationScoped
+//@ConversationScoped
+@ViewScoped
 public class EmpleadoBean implements Serializable {
 	
 	/**
