@@ -1,3 +1,6 @@
+El proyecto se volvio a crear ya que al momento de hacer el commit no guardaba en la ubicacion lo cual se daño 3 repositorios inclido el principal llamado cooperativaUnion.
+Por esa tal razon se creo un nuevo repositorio el dia de hoy.
+
 This project was created from the archetype "wildfly-jakartaee-webapp-archetype".
 
 To deploy it:
