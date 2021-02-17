@@ -19,25 +19,25 @@ public class PolizaPreDAO {
 
 	@PersistenceContext 
 	private EntityManager em;
-	public void crearCreditoPres(PolizaPres cre) {
+	public void crearPolizaPres(PolizaPres cre) {
 		em.persist(cre);
 	}
 	
-	public PolizaPres buscarCreditoPres(int numero) {
-		String jpql= "select cre From CreditoPres cre where cre.codigo = :numero";
+	public PolizaPres buscarPolizaPres(int numero) {
+		String jpql= "select cre From PolizaPres cre where cre.codigo = :numero";
 		Query query = em.createQuery(jpql,PolizaPres.class);
 		query.setParameter("numero", numero);
-		PolizaPres CreditoPres = (PolizaPres) query.getSingleResult();
+		PolizaPres PolizaPres = (PolizaPres) query.getSingleResult();
 		
-		return CreditoPres;
+		return PolizaPres;
 	}
 	
 	public void update(PolizaPres cre) {
 		em.merge(cre);
 	}
 
-	public List<PolizaPres>buscarCreditoPres2(String cuenta_ahorroPres){
-	String nativeQuery = "SELECT * FROM Credito_Prestamo c WHERE c.cuenta_ahorroPres =:cuenta_ahorroPres";
+	public List<PolizaPres>buscarPolizaPres2(String cuenta_ahorroPres){
+	String nativeQuery = "SELECT * FROM Poliza_Prestamo c WHERE c.cuenta_ahorroPres =:cuenta_ahorroPres";
 	Query query = em.createNativeQuery(nativeQuery);
 	query.setParameter("cuenta_ahorroPres", cuenta_ahorroPres);
 	List<PolizaPres> pres = new ArrayList<PolizaPres>();
@@ -59,13 +59,13 @@ public class PolizaPreDAO {
 
 	
 	public List<PolizaPres> mostrar(){
-		String jpql = "select cre from CreditoPres cre";
+		String jpql = "select cre from PolizaPres cre";
 		Query query = em.createQuery(jpql, PolizaPres.class);
-		List<PolizaPres> CreditoPress = query.getResultList();
-		for (PolizaPres CreditoPres : CreditoPress ) {
-			CreditoPres.getPagos().size();
+		List<PolizaPres> PolizaPress = query.getResultList();
+		for (PolizaPres PolizaPres : PolizaPress ) {
+			PolizaPres.getPagos().size();
 		}
-		return CreditoPress;
+		return PolizaPress;
 	}
 	public void nuevaTransaccion(PolizaPres c) {
 		em.persist(c);

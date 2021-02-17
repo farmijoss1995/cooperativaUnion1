@@ -37,7 +37,7 @@ public class PagoDAO {
 	}
 	
 	public List<Pago> listaPagosCajero(int codigo_pre){
-		String nativeQuery = "SELECT * FROM Pago p WHERE p.estado like 'Pendiente' and p.credito_pre =:codigo_pre ORDER BY p.numeroPago DESC";
+		String nativeQuery = "SELECT * FROM Pago p WHERE p.estado like 'Pendiente' and p.poliza_pre =:codigo_pre ORDER BY p.numeroPago DESC";
 		Query query = em.createNativeQuery(nativeQuery);
 		query.setParameter("codigo_pre", codigo_pre);
 		List<Pago> pres = new ArrayList<Pago>();
@@ -83,7 +83,7 @@ public class PagoDAO {
 	}
 	
 	public List<Pago> listaPagos(int codigo_pre){
-		String nativeQuery = "SELECT * FROM pago p WHERE p.credito_pre =:codigo_pre";
+		String nativeQuery = "SELECT * FROM pago p WHERE p.poliza_pre =:codigo_pre";
 		Query query = em.createNativeQuery(nativeQuery);
 		query.setParameter("codigo_pre", codigo_pre);
 		List<Pago> pres = new ArrayList<Pago>();

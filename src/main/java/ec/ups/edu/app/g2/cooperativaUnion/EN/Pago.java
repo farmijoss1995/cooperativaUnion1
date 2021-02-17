@@ -21,8 +21,8 @@ public class Pago {
 	
 	
 	@OneToOne
-    @JoinColumn(name = "credito_pre", referencedColumnName = "codigo")
-    private PolizaPres creditoPres;
+    @JoinColumn(name = "poliza_pre", referencedColumnName = "codigo")
+    private PolizaPres polizaPres;
 	public int getCodigo() {
 		return codigo;
 	}
@@ -61,11 +61,12 @@ public class Pago {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public PolizaPres getCreditoPres() {
-		return creditoPres;
+	
+	public PolizaPres getPolizaPres() {
+		return polizaPres;
 	}
-	public void setCreditoPres(PolizaPres creditoPres) {
-		this.creditoPres = creditoPres;
+	public void setPolizaPres(PolizaPres polizaPres) {
+		this.polizaPres = polizaPres;
 	}
 	public Double getSaldo() {
 		return saldo;

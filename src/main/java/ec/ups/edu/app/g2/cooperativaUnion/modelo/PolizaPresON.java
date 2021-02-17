@@ -38,7 +38,7 @@ public class PolizaPresON {
 	
 	Mail mail = new Mail();
 
-	public void Credito(PolizaTemp t) {
+	public void Poliza(PolizaTemp t) {
 		CuentaAhorro cue = cdao.verCuentaAhorro(t.getNumcuenta());
 		if (cue != null) {
 			PolizaPres cre = new PolizaPres();
@@ -85,7 +85,7 @@ public class PolizaPresON {
 				
 			}
 			try {
-				mail.enviarMail(cue.getUsuario().getCorreo(), "Se ha aprobado su prestamo", "DATOS PAGO>>>>>>>" + listap.toString());
+				mail.enviarMail(cue.getUsuario().getCorreo(), "Se ha aprobado su poliza", "DATOS PAGO>>>>>>>" + listap.toString());
 			} catch (AddressException e) {
 				e.printStackTrace();
 			} catch (MessagingException e) {
@@ -93,8 +93,8 @@ public class PolizaPresON {
 			}
 			
 			cre.setFechaFin(p2.getFechaPago());
-			cue.agregarCredito(cre);
-			credao.crearCreditoPres(cre);
+			cue.agregarPoliza(cre);
+			credao.crearPolizaPres(cre);
 			cue.getUsuario().getCorreo();
 			
 		} else {
@@ -103,12 +103,12 @@ public class PolizaPresON {
 	}
 
 	public PolizaPres Lista(int codigo) {
-		PolizaPres cre = credao.buscarCreditoPres(codigo);
+		PolizaPres cre = credao.buscarPolizaPres(codigo);
 		return cre;
 	}
 	
-	public List<PolizaPres> listarCredito(String numeroCuenta) {
-		return credao.buscarCreditoPres2(numeroCuenta);	
+	public List<PolizaPres> listarPoliza(String numeroCuenta) {
+		return credao.buscarPolizaPres2(numeroCuenta);	
 	}
 	public List<Pago> listarPagos(int codigo_pre) {
 		return pagodao.listaPagos(codigo_pre);

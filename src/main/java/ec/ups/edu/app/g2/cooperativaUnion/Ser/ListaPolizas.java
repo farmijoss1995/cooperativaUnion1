@@ -11,7 +11,7 @@ import javax.ws.rs.QueryParam;
 import ec.ups.edu.app.g2.cooperativaUnion.EN.PolizaPres;
 import ec.ups.edu.app.g2.cooperativaUnion.modelo.PolizaPresON;
 
-@Path("/ListaCredito")
+@Path("/ListaPoliza")
 public class ListaPolizas {
 	
 	@Inject
@@ -19,7 +19,7 @@ public class ListaPolizas {
 
 	@GET
 	@Produces("application/json")
-	public List<PolizaPres> listCreditos(@QueryParam("numeroCuenta") String numeroCuenta) {
-		return credon.listarCredito(numeroCuenta);
+	public List<PolizaPres> listPolizas(@QueryParam("numeroCuenta") String numeroCuenta) {
+		return credon.listarPoliza(numeroCuenta);
 	}
 }

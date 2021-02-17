@@ -70,7 +70,7 @@ public class TransaccionDAO {
 	
 	
 	
-	public List<Object[]> vencimientoCreditos() {
+	public List<Object[]> vencimientoPolizas() {
 		TransformarFecha tr= new TransformarFecha();
 		String fechaPago = tr.transformatFecha();
 		

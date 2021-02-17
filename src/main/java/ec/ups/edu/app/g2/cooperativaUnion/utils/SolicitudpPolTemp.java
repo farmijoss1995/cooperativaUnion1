@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class SolicitudpPolTemp implements Serializable {
 	private int plazo_meses;
-	private String proposito_credito;
-	private int monto_credito;
+	private String proposito_poliza;
+	private int monto_poliza;
 	private String  tipo_empleado;
 	private String estado_civil;
 	private int avaluo_vivienda;
@@ -19,17 +19,18 @@ public class SolicitudpPolTemp implements Serializable {
 	public void setPlazo_meses(int plazo_meses) {
 		this.plazo_meses = plazo_meses;
 	}
-	public String getProposito_credito() {
-		return proposito_credito;
+	
+	public String getProposito_poliza() {
+		return proposito_poliza;
 	}
-	public void setProposito_credito(String proposito_credito) {
-		this.proposito_credito = proposito_credito;
+	public void setProposito_poliza(String proposito_poliza) {
+		this.proposito_poliza = proposito_poliza;
 	}
-	public int getMonto_credito() {
-		return monto_credito;
+	public int getMonto_poliza() {
+		return monto_poliza;
 	}
-	public void setMonto_credito(int monto_credito) {
-		this.monto_credito = monto_credito;
+	public void setMonto_poliza(int monto_poliza) {
+		this.monto_poliza = monto_poliza;
 	}
 	public String getTipo_empleado() {
 		return tipo_empleado;

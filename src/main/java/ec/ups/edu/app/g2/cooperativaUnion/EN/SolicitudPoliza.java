@@ -16,9 +16,9 @@ public class SolicitudPoliza{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int plazoCredito ;
-	private String propositoCredito;
-	private Double montoCredito;
+	private int plazoPoliza ;
+	private String propositoPoliza;
+	private Double montoPoliza;
 	private String tiempoEmpleo;
 	private String estadoCivil;
 	private Double avaluoVivienda;
@@ -58,25 +58,24 @@ public class SolicitudPoliza{
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
-	public int getPlazoCredito() {
-		return plazoCredito;
+	public int getPlazoPoliza() {
+		return plazoPoliza;
 	}
-	public void setPlazoCredito(int plazoCredito) {
-		this.plazoCredito = plazoCredito;
+	public void setPlazoPoliza(int plazoPoliza) {
+		this.plazoPoliza = plazoPoliza;
 	}
-	public String getPropositoCredito() {
-		return propositoCredito;
+	public String getPropositoPoliza() {
+		return propositoPoliza;
 	}
-	public void setPropositoCredito(String propositoCredito) {
-		this.propositoCredito = propositoCredito;
+	public void setPropositoPoliza(String propositoPoliza) {
+		this.propositoPoliza = propositoPoliza;
 	}
-	public Double getMontoCredito() {
-		return montoCredito;
+	public Double getMontoPoliza() {
+		return montoPoliza;
 	}
-	public void setMontoCredito(Double montoCredito) {
-		this.montoCredito = montoCredito;
+	public void setMontoPoliza(Double montoPoliza) {
+		this.montoPoliza = montoPoliza;
 	}
-	
 	public String getTiempoEmpleo() {
 		return tiempoEmpleo;
 	}

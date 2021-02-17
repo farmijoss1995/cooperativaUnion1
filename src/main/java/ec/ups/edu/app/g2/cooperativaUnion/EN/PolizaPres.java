@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="Credito_Prestamo")
+@Table(name="Poliza_Prestamo")
 public class PolizaPres {
 	
 	@Id
@@ -36,11 +36,11 @@ public class PolizaPres {
     private CuentaAhorro cuenta;
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "credito_pre")
+	@JoinColumn(name = "poliza_pre")
 	private List<Pago>pagos;
 	@JsonIgnore
 	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "credito_idcredito")
+    @JoinColumn(name = "poliza_idpoliza")
     private List<Transaccion> listaTra;
 	public void agregarpago(Pago p) {
 	if (pagos == null) {

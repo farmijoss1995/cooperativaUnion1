@@ -11,8 +11,8 @@ public class SolicitudTemporal {
 	private String cedula;
 	private String numeroCuenta;
 	private int id;
-	private Double montoCredito;
-	private int plazoCredito;
+	private Double montoPoliza;
+	private int plazoPoliza;
 	
 	
 	private byte[] cedulaImagen;
@@ -50,17 +50,18 @@ public class SolicitudTemporal {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Double getMontoCredito() {
-		return montoCredito;
+	
+	public Double getMontoPoliza() {
+		return montoPoliza;
 	}
-	public void setMontoCredito(Double montoCredito) {
-		this.montoCredito = montoCredito;
+	public void setMontoPoliza(Double montoPoliza) {
+		this.montoPoliza = montoPoliza;
 	}
-	public int getPlazoCredito() {
-		return plazoCredito;
+	public int getPlazoPoliza() {
+		return plazoPoliza;
 	}
-	public void setPlazoCredito(int plazoCredito) {
-		this.plazoCredito = plazoCredito;
+	public void setPlazoPoliza(int plazoPoliza) {
+		this.plazoPoliza = plazoPoliza;
 	}
 	public byte[] getCedulaImagen() {
 		return cedulaImagen;
@@ -83,8 +84,8 @@ public class SolicitudTemporal {
 	@Override
 	public String toString() {
 		return "SolicitudTemporal [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
-				+ ", numeroCuenta=" + numeroCuenta + ", id=" + id + ", montoCredito=" + montoCredito + ", plazoCredito="
-				+ plazoCredito + ", cedulaImagen=" + Arrays.toString(cedulaImagen) + ", planillaImagen="
+				+ ", numeroCuenta=" + numeroCuenta + ", id=" + id + ", montoPoliza=" + montoPoliza + ", plazoPoliza="
+				+ plazoPoliza + ", cedulaImagen=" + Arrays.toString(cedulaImagen) + ", planillaImagen="
 				+ Arrays.toString(planillaImagen) + ", rolPagosImagen=" + Arrays.toString(rolPagosImagen) + "]";
 	}
 	

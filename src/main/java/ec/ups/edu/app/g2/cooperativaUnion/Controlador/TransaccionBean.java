@@ -35,7 +35,7 @@ public class TransaccionBean implements Serializable {
 	
 	private Transaccion transaccion;
 	private CuentaAhorro cuenta;
-	private PolizaPres credito;
+	private PolizaPres poliza;
 	private Pago pago;
 	private String numcuenta;
 	private List<Transaccion> transacciones;
@@ -47,7 +47,7 @@ public class TransaccionBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();
-		credito = new PolizaPres();
+		poliza = new PolizaPres();
 		cuenta = new CuentaAhorro();
 		pago = new Pago();
 	}
@@ -60,12 +60,12 @@ public class TransaccionBean implements Serializable {
 	}
 	
 	public String guardarTransaccion2(int codigo, double monto, int codpago) {
-		credito = transaccOn.getCredito(codigo);
+		poliza = transaccOn.getCredito(codigo);
 		transaccion.setMonto(monto);
-		transaccion.setCredito(credito);
+		transaccion.setCredito(poliza);
 		pago = transaccOn.getPago(codpago);
-		pago.setCreditoPres(credito);
-		transaccOn.TransPagoCredito(transaccion, credito, pago);
+		pago.setCreditoPres(poliza);
+		transaccOn.TransPagoCredito(transaccion, poliza, pago);
 		
 		return ""+codigo;
 	}
@@ -76,12 +76,13 @@ public class TransaccionBean implements Serializable {
 	}
 	
 	
-	public PolizaPres getCredito() {
-		return credito;
+	
+	public PolizaPres getPoliza() {
+		return poliza;
 	}
 
-	public void setCredito(PolizaPres credito) {
-		this.credito = credito;
+	public void setPoliza(PolizaPres poliza) {
+		this.poliza = poliza;
 	}
 
 	public int getCodigo() {
@@ -119,7 +120,7 @@ public class TransaccionBean implements Serializable {
 		SolicitudPolBean s = new SolicitudPolBean();
 		s.setnumcuenta(numcuenta);
 		
-		return "vistaSolicitudCredito?faces-redirect=true&numcuenta="+ numcuenta;
+		return "vistaSolicitudPoliza?faces-redirect=true&numcuenta="+ numcuenta;
 		
 	}
 	
@@ -136,7 +137,7 @@ public class TransaccionBean implements Serializable {
 	
 	public String paginaSolicitud(String  numcuenta) {
 		this.numcuenta=numcuenta;
-	 return "vistaSolicitudCredito?faces-redirect=true&numcuenta="+numcuenta;
+	 return "vistaSolicitudPoliza?faces-redirect=true&numcuenta="+numcuenta;
 }
 
 	public Transaccion getTransaccion() {

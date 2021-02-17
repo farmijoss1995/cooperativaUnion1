@@ -38,7 +38,7 @@ public class SolicitudPolON {
 	
 	public void nuevaSolicitud(SolicitudPoliza solicitud, CuentaAhorro cuenta) {
 		solicitud.setEstado("Pendiente");
-	  sdao.insertSolicitudCredito(solicitud);
+	  sdao.insertSolicitudPoliza(solicitud);
 	}
 	
 	public CuentaAhorro getCuenta(String numeroCuenta) { 
@@ -46,12 +46,12 @@ public class SolicitudPolON {
     }
 	
 	public SolicitudPoliza getSolicitud(int codigo) {
-		return sdao.buscarSolicitudCredito(codigo);
+		return sdao.buscarSolicitudPoliza(codigo);
 	}
 	
 	
 	public List<SolicitudPoliza> verSolicitudCredito() {
-		return sdao.getSolicitudCreditoes();
+		return sdao.getSolicitudPolizaes();
 	}
 	
 	public void actualizarSolisitud(SolicitudPoliza solicitud) {

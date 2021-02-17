@@ -35,13 +35,13 @@ public class SolicitudPolDAO {
 	@PersistenceContext 
 	private EntityManager em;
 
-	public void insertSolicitudCredito(SolicitudPoliza solicitud) {
+	public void insertSolicitudPoliza(SolicitudPoliza solicitud) {
 		em.persist(solicitud);
 	}
 
-	public SolicitudPoliza buscarSolicitudCredito(int id) {
-		SolicitudPoliza solicitudCredito = em.find(SolicitudPoliza.class,id);
-		return solicitudCredito;
+	public SolicitudPoliza buscarSolicitudPoliza(int id) {
+		SolicitudPoliza solicitudPoliza = em.find(SolicitudPoliza.class,id);
+		return solicitudPoliza;
 		
 	}
 	
@@ -51,7 +51,7 @@ public class SolicitudPolDAO {
 	}
 	
 	public void  actualizar2(int id ,String estado) {
-		String jqpl = "Update SolicitudCredito s SET s.estado = :estado where s.id = :id";
+		String jqpl = "Update SolicitudPoliza s SET s.estado = :estado where s.id = :id";
 		Query query = em.createNativeQuery(jqpl, SolicitudPoliza.class);
 		query.setParameter("id", id);
 		query.setParameter("estado", estado);
@@ -59,8 +59,8 @@ public class SolicitudPolDAO {
 		System.out.println(r);
 		
 	}
-	public List<SolicitudPoliza> getSolicitudCreditoes(){
-		String jpql = "SELECT t FROM SolicitudCredito t";
+	public List<SolicitudPoliza> getSolicitudPolizaes(){
+		String jpql = "SELECT t FROM SolicitudPoliza t";
 		Query query = em.createQuery(jpql, SolicitudPoliza.class);
 		List<SolicitudPoliza> listado =  query.getResultList();	
 		return listado;
@@ -78,8 +78,8 @@ public class SolicitudPolDAO {
 		return trans;
 		}
 	public List<SolicitudTemporal> listaSolictudesEmpleado() {
-		String nativeQuery = "SELECT u.nombre,u.apellido,u.cedula,c.numeroCuenta,s.id,s.montoCredito,s.plazoCredito,s.cedulaImagen,s.planillaImagen,s.rolPagosImagen "
-				+ "FROM SolicitudCredito s, CuentaAhorro c,Usuario u "
+		String nativeQuery = "SELECT u.nombre,u.apellido,u.cedula,c.numeroCuenta,s.id,s.montoPoliza,s.plazoPoliza,s.cedulaImagen,s.planillaImagen,s.rolPagosImagen "
+				+ "FROM SolicitudPoliza s, CuentaAhorro c,Usuario u "
 				+ "WHERE  c.cedula_usuario like u.cedula and c.numeroCuenta like s.cuenta_ahorro and s.estado like 'Pendiente'";
 		Query query = em.createNativeQuery(nativeQuery);
 		List<SolicitudTemporal> ingresos = new ArrayList<>();
@@ -92,8 +92,8 @@ public class SolicitudPolDAO {
 			ct.setCedula(item[2].toString());
 			ct.setNumeroCuenta(item[3].toString());
 			ct.setId(Integer.valueOf(item[4].toString()));
-			ct.setMontoCredito(Double.valueOf(item[5].toString()));
-			ct.setPlazoCredito(Integer.valueOf(item[6].toString()));
+			ct.setMontoPoliza(Double.valueOf(item[5].toString()));
+			ct.setPlazoPoliza(Integer.valueOf(item[6].toString()));
 			ingresos.add(ct);
 			
 		}

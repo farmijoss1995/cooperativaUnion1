@@ -86,12 +86,12 @@ public class SolicitudPolBean implements Serializable  {
 	public String consumiendoServicoPython() {
 		solicitud = son.getSolicitud(codigo);
 		SolicitudpPolTemp ct = new SolicitudpPolTemp();
-		ct.setPlazo_meses(solicitud.getPlazoCredito());
-		ct.setProposito_credito(solicitud.getPropositoCredito());
-		ct.setMonto_credito((int)Math.round(solicitud.getMontoCredito()));
+		ct.setPlazo_meses(solicitud.getPlazoPoliza());
+		ct.setProposito_poliza(solicitud.getPropositoPoliza());
+		ct.setMonto_poliza((int)Math.round(solicitud.getMontoPoliza()));
 		ct.setTipo_empleado(solicitud.getTiempoEmpleo());
 		ct.setEstado_civil(solicitud.getEstadoCivil());
-		ct.setAvaluo_vivienda((int)Math.round(solicitud.getMontoCredito()));
+		ct.setAvaluo_vivienda((int)Math.round(solicitud.getMontoPoliza()));
 		ct.setActivos(solicitud.getActivos());
 		ct.setVivienda(solicitud.getTipoVivienda());
 		ct.setEmpleo(solicitud.getTiempoEmpleo());
@@ -120,7 +120,7 @@ public class SolicitudPolBean implements Serializable  {
 		solicitud.setCuentaAhorro(cuenta);
 		uploadFile();
 		son.nuevaSolicitud(solicitud, cuenta);
-		return "vistaSolicitudCredito?faces-redirect=true&numcuenta="+cuenta.getNumeroCuenta();	
+		return "vistaSolicitudPoliza?faces-redirect=true&numcuenta="+cuenta.getNumeroCuenta();	
 	}
 
 	public void uploadFile() {
@@ -157,7 +157,7 @@ public class SolicitudPolBean implements Serializable  {
 		solicitud = son.getSolicitud(codigo);
 		this.numcuenta= solicitud.getCuentaAhorro().getNumeroCuenta();
 		this.codigo = codigo;
-		 return "vistaRevisionSolicitudCredito?faces-redirect=true&codigo="+codigo;
+		 return "vistaRevisionSolicitudPoliza?faces-redirect=true&codigo="+codigo;
 	}
 	
 	public List<SolicitudPoliza> loadDataSolicitudes(String numcuenta) {
@@ -178,10 +178,10 @@ public class SolicitudPolBean implements Serializable  {
 		if (solicitud.getEstado().equals("Aprobado")) {
 			PolizaTemp tem = new PolizaTemp();
 			tem.setNumcuenta(solicitud.getCuentaAhorro().getNumeroCuenta());
-			tem.setTipo(solicitud.getPropositoCredito());
-			tem.setMonto(solicitud.getMontoCredito());
-			tem.setCuotas(solicitud.getPlazoCredito());
-			creon.Credito(tem);
+			tem.setTipo(solicitud.getPropositoPoliza());
+			tem.setMonto(solicitud.getMontoPoliza());
+			tem.setCuotas(solicitud.getPlazoPoliza());
+			creon.Poliza(tem);
 
 		}else if(solicitud.getEstado().equals("Denegado")) {
 			Mail mail = new Mail();
@@ -195,7 +195,7 @@ public class SolicitudPolBean implements Serializable  {
 			}
 			
 		}
-		return"VistaJefeCredito?faces-redirect=true";
+		return"VistaJefePoliza?faces-redirect=true";
 	}
 	
 

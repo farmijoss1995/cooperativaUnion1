@@ -141,14 +141,14 @@ public class LoginBean implements Serializable {
 					aux = "AdministradorUsuario?faces-redirect=true";
 					return aux;
 
-				} else if (empleado.getCargo().equals("JefeCredito")) {
+				} else if (empleado.getCargo().equals("JefePoliza")) {
 					System.out.println("empleado" + empleado.toString());
 					HttpSession session = SessionUtils.getSession();
 					session.setAttribute("username", empleado);
 					sendEmpleado();
 					guardaSession(empleado.getCedula());
 
-					aux = "VistaJefeCredito?faces-redirect=true";
+					aux = "VistaJefePoliza?faces-redirect=true";
 					return aux;
 				}
 
@@ -327,7 +327,7 @@ public class LoginBean implements Serializable {
 	}
 
 	public List<PolizaPres> loadDataPrestamos(String cuentaAhorro) {
-		prestamos= cpon.listarCredito(cuentaAhorro);
+		prestamos= cpon.listarPoliza(cuentaAhorro);
 		return prestamos;
 	}
 

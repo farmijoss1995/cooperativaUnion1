@@ -28,8 +28,8 @@ public class Transaccion{
 	private CuentaAhorro cuenta;
 	
 	@OneToOne
-	@JoinColumn(name = "credito_idcredito", referencedColumnName = "codigo")
-	private PolizaPres credito;
+	@JoinColumn(name = "poliza_idpoliza", referencedColumnName = "codigo")
+	private PolizaPres poliza;
 	
 	
 	@XmlTransient
@@ -75,16 +75,17 @@ public class Transaccion{
 		this.cuent = cuent;
 	}
 
-	public PolizaPres getCredito() {
-		return credito;
+	
+	public PolizaPres getPoliza() {
+		return poliza;
 	}
-	public void setCredito(PolizaPres credito) {
-		this.credito = credito;
+	public void setPoliza(PolizaPres poliza) {
+		this.poliza = poliza;
 	}
 	@Override
 	public String toString() {
 		return "Transaccion [id=" + id + ", fecha=" + fecha + ", monto=" + monto + ", tipoTransaccion="
-				+ tipoTransaccion + ", cuenta=" + cuenta + ", credito=" + credito + ", cuent=" + cuent + "]";
+				+ tipoTransaccion + ", cuenta=" + cuenta + ", poliza=" + poliza + ", cuent=" + cuent + "]";
 	}
 	
 

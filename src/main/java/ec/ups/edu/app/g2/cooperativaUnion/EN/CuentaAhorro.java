@@ -40,13 +40,13 @@ public class CuentaAhorro{
 	@JsonIgnore
 	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "cuenta_ahorroPres")
-	private List<PolizaPres>creditos;
+	private List<PolizaPres>polizas;
 	
-	public void agregarCredito(PolizaPres cred) {
-	if (creditos == null) {
-		creditos = new ArrayList<PolizaPres>();
+	public void agregarPoliza(PolizaPres cred) {
+	if (polizas == null) {
+		polizas = new ArrayList<PolizaPres>();
 	}
-	creditos.add(cred);
+	polizas.add(cred);
 	}
 	
 	public String getNumeroCuenta() {
@@ -103,18 +103,19 @@ public class CuentaAhorro{
 		this.listaSolicitud.add(sc);
 	}
 
-	public List<PolizaPres> getCreditos() {
-		return creditos;
+	
+	public List<PolizaPres> getPolizas() {
+		return polizas;
 	}
 
-	public void setCreditos(List<PolizaPres> creditos) {
-		this.creditos = creditos;
+	public void setPolizas(List<PolizaPres> polizas) {
+		this.polizas = polizas;
 	}
 
 	@Override
 	public String toString() {
 		return "CuentaAhorro [numeroCuenta=" + numeroCuenta + ", saldoCuenta=" + saldoCuenta + ", usuario=" + usuario
-				+ ", listaTra=" + listaTra + ", listaSolicitud=" + listaSolicitud + ", creditos=" + creditos + "]";
+				+ ", listaTra=" + listaTra + ", listaSolicitud=" + listaSolicitud + ", polizas=" + polizas + "]";
 	}
 	
 	

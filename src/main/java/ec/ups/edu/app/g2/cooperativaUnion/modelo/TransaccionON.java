@@ -39,7 +39,7 @@ public class TransaccionON {
 	TransaccionDAO transaccionDao;
 
 	@Inject
-	PolizaPreDAO creditoDao;
+	PolizaPreDAO polizaDao;
 
 	@Inject
 	PagoDAO pagoDao;
@@ -55,7 +55,7 @@ public class TransaccionON {
 			TransDeposito(transaccion, cuenta);
 		} else if (transaccion.getTipoTransaccion().equals("Retiro")) {
 			TransRetiro(transaccion, cuenta);
-		} else if (transaccion.getTipoTransaccion().equals("Pago Credito")) {
+		} else if (transaccion.getTipoTransaccion().equals("Pago Poliza")) {
 			System.out.println("Metodo construccion");
 		}
 
@@ -65,8 +65,8 @@ public class TransaccionON {
 		return cuentaDao.buscarCuentaAhorro(numeroCuenta);
 	}
 
-	public PolizaPres getCredito(int codigo) {
-		return creditoDao.buscarCreditoPres(codigo);
+	public PolizaPres getPoliza(int codigo) {
+		return polizaDao.buscarPolizaPres(codigo);
 	}
 
 	public Pago getPago(int codigo) {
@@ -103,15 +103,15 @@ public class TransaccionON {
 		}
 	}
 
-	public void TransPagoCredito(Transaccion transaccion, PolizaPres credito, Pago pago) {
+	public void TransPagoPoliza(Transaccion transaccion, PolizaPres poliza, Pago pago) {
 		Decimales d = new Decimales();
 	if(transaccion.getMonto()>=pago.getSaldo()) {
 		
-		double nuevoSaldo =  d.redondearDecimales(credito.getSaldo() - transaccion.getMonto(),2);
+		double nuevoSaldo =  d.redondearDecimales(poliza.getSaldo() - transaccion.getMonto(),2);
 		double nuevoSaldoPago = d.redondearDecimales(pago.getSaldo() - transaccion.getMonto(),2);
 		
-		credito.setSaldo(nuevoSaldo);
-		creditoDao.update(credito);
+		poliza.setSaldo(nuevoSaldo);
+		polizaDao.update(poliza);
 		if (nuevoSaldoPago <= 0) {
 			pago.setEstado("Pagado");
 			pago.setSaldo(0.0);
@@ -125,21 +125,21 @@ public class TransaccionON {
 		}
 		pagoDao.update(pago);
 		transaccion.setFecha(new Date());
-		transaccion.setTipoTransaccion("Pago Credito");
-		transaccion.setCuenta(credito.getCuenta());
-		transaccion.setCredito(credito);
+		transaccion.setTipoTransaccion("Pago Poliza");
+		transaccion.setCuenta(poliza.getCuenta());
+		transaccion.setPoliza(poliza);
 		transaccionDao.nuevaTransaccion(transaccion);
 	}else {
-		double nuevoSaldo =  d.redondearDecimales(credito.getSaldo() - transaccion.getMonto(),2);
+		double nuevoSaldo =  d.redondearDecimales(poliza.getSaldo() - transaccion.getMonto(),2);
 		double nuevoSaldoPago = d.redondearDecimales(pago.getSaldo() - transaccion.getMonto(),2);
-		credito.setSaldo(nuevoSaldo);
-		creditoDao.update(credito);
+		poliza.setSaldo(nuevoSaldo);
+		polizaDao.update(poliza);
 		pago.setSaldo(nuevoSaldoPago);
 		pagoDao.update(pago);
 		transaccion.setFecha(new Date());
-		transaccion.setTipoTransaccion("Pago Credito");
-		transaccion.setCuenta(credito.getCuenta());
-		transaccion.setCredito(credito);
+		transaccion.setTipoTransaccion("Pago Poliza");
+		transaccion.setCuenta(poliza.getCuenta());
+		transaccion.setPoliza(poliza);
 		transaccionDao.nuevaTransaccion(transaccion);
 	}
 		
@@ -283,7 +283,7 @@ public class TransaccionON {
 	
 	public List<Object[]> vencimientoPagos(){
 		List<Pago> ps = new ArrayList<>();
-		List<Object[]> pagos = transaccionDao.vencimientoCreditos();
+		List<Object[]> pagos = transaccionDao.vencimientoPolizas();
 		for (Object item[] : pagos) {
 			Pago p = new Pago();
 			CuentaAhorro cuenta = new CuentaAhorro();
@@ -295,33 +295,33 @@ public class TransaccionON {
 			Double saldoPago = Double.parseDouble(item[7].toString());
 			
 			int cre =Integer.parseInt(item[6].toString()) ;
-			cp = creditoDao.buscarCreditoPres(cre);
+			cp = polizaDao.buscarPolizaPres(cre);
 			
 			if (cuenta.getSaldoCuenta() >= saldoPago ) {
 				
 				Double nuevoSaldoCuenta = cuenta.getSaldoCuenta() - saldoPago;
-				Double nuevoSaldoCredito = cp.getSaldo() - saldoPago;
-				cp.setSaldo(nuevoSaldoCredito);
+				Double nuevoSaldoPoliza = cp.getSaldo() - saldoPago;
+				cp.setSaldo(nuevoSaldoPoliza);
 				
 				p.setCodigo(Integer.parseInt(item[1].toString()));
 				p.setSaldo(0.0);
 				p.setEstado("Pagado");
 				p.setCuenta(cue);
 				p.setValor(Double.parseDouble(item[5].toString()));
-				p.setCreditoPres(cp);
+				p.setPolizaPres(cp);
 				p.setFechaPago(item [3].toString());
 				
 				t.setMonto(saldoPago);
 				t.setFecha(new Date());
 				t.setTipoTransaccion("Debito Automatico Prestamo");
 				t.setCuenta(cuenta);
-				t.setCredito(cp);
+				t.setPoliza(cp);
 				
 				cuenta.setSaldoCuenta(nuevoSaldoCuenta);
 				
 				try {
 					cuentaDao.update(cuenta);
-					creditoDao.update(cp);
+					polizaDao.update(cp);
 					pagoDao.update(p);
 					transaccionDao.nuevaTransaccion(t);
 				} catch (Exception e) {
@@ -332,27 +332,27 @@ public class TransaccionON {
 	
 			}else if(cuenta.getSaldoCuenta() > 0) {
 				Double nuevoSaldoPago = saldoPago - cuenta.getSaldoCuenta() ;
-				Double nuevoSaldoCredito = cp.getSaldo() - saldoPago;
-				cp.setSaldo(nuevoSaldoCredito);
+				Double nuevoSaldoPoliza = cp.getSaldo() - saldoPago;
+				cp.setSaldo(nuevoSaldoPoliza);
 				
 				p.setSaldo(nuevoSaldoPago);
 				p.setEstado("Pendiente");
 				p.setCuenta(cue);
 				p.setValor(Double.parseDouble(item[5].toString()));
-				p.setCreditoPres(cp);
+				p.setPolizaPres(cp);
 				p.setFechaPago(item [3].toString());
 				
 				t.setMonto(cuenta.getSaldoCuenta());
 				t.setFecha(new Date());
 				t.setTipoTransaccion("Debito Automatico Prestamo");
 				t.setCuenta(cuenta);
-				t.setCredito(cp);
+				t.setPoliza(cp);
 				
 				cuenta.setSaldoCuenta(0.0);
 				
 				try {
 					cuentaDao.update(cuenta);
-					creditoDao.update(cp);
+					polizaDao.update(cp);
 					pagoDao.update(p);
 					transaccionDao.nuevaTransaccion(t);
 				} catch (Exception e) {
