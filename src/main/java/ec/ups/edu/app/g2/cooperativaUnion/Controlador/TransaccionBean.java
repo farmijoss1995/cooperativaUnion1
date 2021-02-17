@@ -60,12 +60,12 @@ public class TransaccionBean implements Serializable {
 	}
 	
 	public String guardarTransaccion2(int codigo, double monto, int codpago) {
-		poliza = transaccOn.getCredito(codigo);
+		poliza = transaccOn.getPoliza(codigo);
 		transaccion.setMonto(monto);
-		transaccion.setCredito(poliza);
+		transaccion.setPoliza(poliza);
 		pago = transaccOn.getPago(codpago);
-		pago.setCreditoPres(poliza);
-		transaccOn.TransPagoCredito(transaccion, poliza, pago);
+		pago.setPolizaPres(poliza);
+		transaccOn.TransPagoPoliza(transaccion, poliza, pago);
 		
 		return ""+codigo;
 	}

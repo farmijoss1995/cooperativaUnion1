@@ -17,7 +17,7 @@ public class Mail implements Serializable {
 	
 	public void enviarMail(String destinatario,String asunto, String cuerpo) throws AddressException, MessagingException{
 		
-		String remitente="bancavirtual2020@gmail.com";
+		String remitente="marceloas@hotmail.es";
 		
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com");

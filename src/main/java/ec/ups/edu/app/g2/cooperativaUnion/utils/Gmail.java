@@ -25,7 +25,7 @@ public class Gmail {
 	        propiedad.setProperty("mail smtp auth", "true");
 	        
 	        Session sesion = Session.getDefaultInstance(propiedad);
-	        String correoEnvia = "nacipucha.angel1993@gmail.com";
+	        String correoEnvia = "marceloas@hotmail.es";
 	        String contrasena = "";
 	        String receptor = "";
 	        String asunto = "";
